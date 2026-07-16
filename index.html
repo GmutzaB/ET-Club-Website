@@ -391,6 +391,19 @@
     text-decoration:none;
   }
   .proj-paper a:hover{color:var(--ink);}
+  .proj-image{
+    width:100%;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    border-bottom:1px solid var(--ink);
+    background:var(--paper-line);
+  }
+  .form-hint{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-soft);
+    margin-top:6px;
+  }
 
   /* join */
   .join-inner{
@@ -747,6 +760,14 @@
             <label for="pPaper">Paper / publication link (optional)</label>
             <input type="url" id="pPaper" placeholder="https://…">
           </div>
+          <div class="field full">
+            <label for="pVideo">Video link (optional — YouTube, Vimeo, etc.)</label>
+            <input type="url" id="pVideo" placeholder="https://…">
+          </div>
+          <div class="field full">
+            <label for="pImage">Photo (optional — max 5MB, jpg/png/webp/gif)</label>
+            <input type="file" id="pImage" accept="image/png,image/jpeg,image/webp,image/gif">
+          </div>
           <input type="text" class="honey" id="pHoney" tabindex="-1" autocomplete="off">
         </div>
         <div class="form-actions">
@@ -904,6 +925,7 @@
       }
       projectsList.innerHTML = rows.map(p => `
         <div class="proj-card">
+          ${p.image_url ? `<img class="proj-image" src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.title)}" loading="lazy">` : ''}
           <div class="proj-head">
             <h3>${escapeHtml(p.title)}</h3>
             <p>${escapeHtml(p.description)}</p>
@@ -914,6 +936,7 @@
             <div><p class="tb-label">Lead</p><p class="tb-value">${escapeHtml(p.lead)}</p></div>
           </div>
           ${p.paper_url ? `<div class="proj-paper"><a href="${escapeHtml(p.paper_url)}" target="_blank" rel="noopener noreferrer">Read the paper →</a></div>` : ''}
+          ${p.video_url ? `<div class="proj-paper"><a href="${escapeHtml(p.video_url)}" target="_blank" rel="noopener noreferrer">Watch the video →</a></div>` : ''}
         </div>
       `).join('');
     }
@@ -976,6 +999,35 @@
       statusEl.textContent = 'Submitting…';
       statusEl.className = 'form-status';
 
+      // handle optional photo upload first
+      let imageUrl = null;
+      const fileInput = document.getElementById('pImage');
+      const file = fileInput.files[0];
+      if (file) {
+        if (file.size > 5 * 1024 * 1024) {
+          statusEl.textContent = 'Photo is over 5MB — pick a smaller file.';
+          statusEl.className = 'form-status error';
+          btn.disabled = false;
+          return;
+        }
+        statusEl.textContent = 'Uploading photo…';
+        const ext = file.name.split('.').pop();
+        const path = `${crypto.randomUUID()}.${ext}`;
+        const { error: uploadError } = await supabase.storage
+          .from('project-images')
+          .upload(path, file);
+        if (uploadError) {
+          statusEl.textContent = 'Photo upload failed — try again or skip the photo.';
+          statusEl.className = 'form-status error';
+          btn.disabled = false;
+          return;
+        }
+        const { data: urlData } = supabase.storage.from('project-images').getPublicUrl(path);
+        imageUrl = urlData.publicUrl;
+      }
+
+      statusEl.textContent = 'Submitting…';
+
       const { error } = await supabase.from('projects').insert({
         title: document.getElementById('pTitle').value.trim(),
         lead: document.getElementById('pLead').value.trim(),
@@ -983,6 +1035,8 @@
         status: document.getElementById('pStatus').value,
         project_type: document.getElementById('pType').value,
         paper_url: document.getElementById('pPaper').value.trim() || null,
+        video_url: document.getElementById('pVideo').value.trim() || null,
+        image_url: imageUrl,
         submitted_by_email: document.getElementById('pEmail').value.trim(),
         approved: false
       });
