@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering Technology Club · PennWest University</title>
+<meta name="description" content="Engineering Technology Club at PennWest University — mechatronics, controls, build nights, and industry connections.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blueprint:#0E1C2E;
+    --blueprint-line:#2A5080;
+    --blueprint-line-soft:#1B3A5C;
+    --amber:#F0A83A;
+    --amber-dim:#B87F26;
+    --paper:#F1ECE0;
+    --paper-line:#D8D0BC;
+    --ink:#16202B;
+    --ink-soft:#4B5A68;
+    --white:#F4F7FA;
+    --white-soft:#B9C6D4;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+    --sans:'IBM Plex Sans', system-ui, sans-serif;
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.5;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  ::selection{background:var(--amber);color:var(--blueprint);}
+
+  :focus-visible{
+    outline:2px solid var(--amber);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(14,28,46,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--blueprint-line);
+  }
+  .nav-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:16px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.08em;
+    color:var(--white);
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .nav-mark .dot{
+    width:8px;height:8px;background:var(--amber);
+    display:inline-block;
+    flex:none;
+  }
+  nav.links{
+    display:flex;
+    gap:28px;
+  }
+  nav.links a{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--white-soft);
+    text-decoration:none;
+    transition:color 0.15s ease;
+  }
+  nav.links a:hover{color:var(--amber);}
+  .nav-toggle{display:none;}
+
+  @media (max-width:720px){
+    nav.links{
+      position:fixed;
+      top:57px;left:0;right:0;
+      background:var(--blueprint);
+      flex-direction:column;
+      gap:0;
+      border-bottom:1px solid var(--blueprint-line);
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.25s ease;
+    }
+    nav.links.open{max-height:280px;}
+    nav.links a{
+      padding:16px 28px;
+      border-top:1px solid var(--blueprint-line-soft);
+    }
+    .nav-toggle{
+      display:block;
+      background:none;
+      border:1px solid var(--blueprint-line);
+      color:var(--white);
+      font-family:var(--mono);
+      font-size:12px;
+      padding:6px 10px;
+      cursor:pointer;
+    }
+  }
+
+  /* ---------- HERO (blueprint) ---------- */
+  .hero{
+    background:
+      linear-gradient(var(--blueprint-line-soft) 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, var(--blueprint-line-soft) 1px, transparent 1px) 0 0/40px 40px,
+      var(--blueprint);
+    color:var(--white);
+    position:relative;
+    padding:96px 0 0 0;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(ellipse at 20% 20%, rgba(240,168,58,0.10), transparent 55%);
+    pointer-events:none;
+  }
+  .hero-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px 64px;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin:0 0 22px;
+  }
+  h1.hero-title{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:clamp(34px, 6vw, 64px);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    margin:0 0 22px;
+    max-width:14ch;
+  }
+  .hero-sub{
+    font-size:18px;
+    color:var(--white-soft);
+    max-width:52ch;
+    margin:0 0 40px;
+  }
+  .hero-cta{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:72px;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:13px 22px;
+    border:1px solid transparent;
+    display:inline-block;
+    transition:transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .btn-primary{background:var(--amber);color:var(--blueprint);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border-color:var(--blueprint-line);color:var(--white);}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber);}
+
+  /* title block — signature element */
+  .title-block{
+    border:1px solid var(--blueprint-line);
+    background:rgba(255,255,255,0.02);
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    max-width:640px;
+  }
+  .tb-cell{
+    padding:14px 18px;
+    border-right:1px solid var(--blueprint-line);
+    border-top:1px solid var(--blueprint-line);
+  }
+  .tb-cell:nth-child(4n){border-right:none;}
+  .tb-cell:nth-child(-n+4){border-top:none;}
+  .tb-label{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--white-soft);
+    margin:0 0 4px;
+  }
+  .tb-value{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--white);
+    margin:0;
+  }
+  @media (max-width:600px){
+    .title-block{grid-template-columns:repeat(2,1fr);}
+    .tb-cell:nth-child(4n){border-right:1px solid var(--blueprint-line);}
+    .tb-cell:nth-child(2n){border-right:none;}
+    .tb-cell:nth-child(-n+2){border-top:none;}
+    .tb-cell:nth-child(n+3){border-top:1px solid var(--blueprint-line);}
+  }
+
+  /* ---------- SECTIONS (paper) ---------- */
+  section{
+    padding:88px 0;
+    border-bottom:1px solid var(--paper-line);
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:24px;
+    margin-bottom:44px;
+    flex-wrap:wrap;
+  }
+  .section-num{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--amber-dim);
+    letter-spacing:0.08em;
+  }
+  h2{
+    font-family:var(--mono);
+    font-size:clamp(24px,3.4vw,32px);
+    margin:6px 0 0;
+    letter-spacing:-0.01em;
+  }
+  .section-note{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    max-width:34ch;
+    text-align:right;
+  }
+  @media (max-width:600px){.section-note{text-align:left;}}
+
+  .lede{
+    font-size:19px;
+    max-width:62ch;
+    color:var(--ink);
+    margin:0 0 20px;
+  }
+  .lede-sub{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:60ch;
+  }
+
+  /* what we do grid */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    background:var(--paper-line);
+    border:1px solid var(--paper-line);
+  }
+  @media (max-width:720px){.grid{grid-template-columns:1fr;}}
+  .card{
+    background:var(--paper);
+    padding:32px;
+  }
+  .card h3{
+    font-family:var(--mono);
+    font-size:16px;
+    margin:0 0 12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .card h3 .mark{color:var(--amber-dim);}
+  .card p{
+    color:var(--ink-soft);
+    font-size:15px;
+    margin:0;
+  }
+
+  /* events */
+  .event-list{border-top:1px solid var(--paper-line);}
+  .event-row{
+    display:grid;
+    grid-template-columns:140px 1fr auto;
+    gap:24px;
+    align-items:center;
+    padding:22px 0;
+    border-bottom:1px solid var(--paper-line);
+  }
+  @media (max-width:640px){
+    .event-row{grid-template-columns:1fr;gap:6px;}
+  }
+  .event-date{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--amber-dim);
+  }
+  .event-name{font-weight:600;font-size:16px;}
+  .event-type{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    border:1px solid var(--paper-line);
+    padding:5px 10px;
+    white-space:nowrap;
+    justify-self:start;
+  }
+  @media (max-width:640px){.event-type{justify-self:start;margin-top:4px;}}
+
+  /* projects — title-block styled cards */
+  .proj-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+  }
+  @media (max-width:720px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{
+    border:1px solid var(--ink);
+    background:var(--white);
+  }
+  .proj-head{
+    padding:22px 24px 18px;
+  }
+  .proj-head h3{
+    font-family:var(--mono);
+    font-size:17px;
+    margin:0 0 8px;
+  }
+  .proj-head p{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    margin:0;
+  }
+  .proj-meta{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--ink);
+  }
+  .proj-meta div{
+    padding:10px 14px;
+    border-right:1px solid var(--paper-line);
+  }
+  .proj-meta div:last-child{border-right:none;}
+  .proj-meta .tb-label{color:var(--ink-soft);}
+  .proj-meta .tb-value{color:var(--ink);font-family:var(--mono);font-size:12.5px;}
+  .proj-paper{
+    border-top:1px solid var(--paper-line);
+    padding:12px 24px;
+  }
+  .proj-paper a{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--amber-dim);
+    text-decoration:none;
+  }
+  .proj-paper a:hover{color:var(--ink);}
+
+  /* join */
+  .join-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+    flex-wrap:wrap;
+  }
+  .join-inner .lede{margin-bottom:8px;}
+
+  footer{
+    padding:36px 0;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .edit-note{
+    background:#FCEFD9;
+    border:1px dashed var(--amber-dim);
+    color:var(--ink);
+    font-family:var(--mono);
+    font-size:12.5px;
+    padding:10px 14px;
+    margin-bottom:28px;
+  }
+
+  /* ---------- dynamic list states ---------- */
+  .state-msg{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--ink-soft);
+    padding:18px 0;
+  }
+  .state-msg.error{color:#B3432B;}
+
+  /* ---------- submit toggle + forms ---------- */
+  .submit-toggle{
+    margin-top:28px;
+  }
+  .submit-panel{
+    display:none;
+    margin-top:24px;
+    border:1px solid var(--ink);
+    background:var(--white);
+    padding:28px;
+  }
+  .submit-panel.open{display:block;}
+  .submit-panel h4{
+    font-family:var(--mono);
+    font-size:14px;
+    margin:0 0 6px;
+  }
+  .submit-panel .form-note{
+    color:var(--ink-soft);
+    font-size:13.5px;
+    margin:0 0 20px;
+  }
+  .form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .form-grid .full{grid-column:1 / -1;}
+  @media (max-width:560px){.form-grid{grid-template-columns:1fr;}}
+  .field label{
+    display:block;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .field input,
+  .field select,
+  .field textarea{
+    width:100%;
+    font-family:var(--sans);
+    font-size:14.5px;
+    color:var(--ink);
+    background:var(--paper);
+    border:1px solid var(--paper-line);
+    padding:10px 12px;
+  }
+  .field textarea{resize:vertical;min-height:80px;}
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus{
+    outline:2px solid var(--amber);
+    outline-offset:1px;
+    border-color:var(--amber-dim);
+  }
+  .honey{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  .form-actions{
+    margin-top:20px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .btn-submit{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    background:var(--ink);
+    color:var(--white);
+    border:none;
+    padding:12px 22px;
+    cursor:pointer;
+    transition:background 0.15s ease;
+  }
+  .btn-submit:hover{background:var(--amber-dim);}
+  .btn-submit:disabled{opacity:0.5;cursor:not-allowed;}
+  .form-status{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .form-status.ok{color:#2E7D4F;}
+  .form-status.error{color:#B3432B;}
+
+  /* ---------- postings list ---------- */
+  .posting-row{
+    display:grid;
+    grid-template-columns:110px 1fr auto;
+    gap:24px;
+    align-items:center;
+    padding:20px 0;
+    border-bottom:1px solid var(--paper-line);
+  }
+  @media (max-width:640px){.posting-row{grid-template-columns:1fr;gap:6px;}}
+  .posting-type{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--amber-dim);
+  }
+  .posting-main .company{
+    color:var(--ink-soft);
+    font-size:14px;
+    margin-top:2px;
+  }
+  .posting-link{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    border:1px solid var(--ink);
+    padding:8px 14px;
+    text-decoration:none;
+    color:var(--ink);
+    white-space:nowrap;
+    justify-self:start;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .posting-link:hover{background:var(--ink);color:var(--white);}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-mark"><span class="dot"></span>ET CLUB · PENNWEST</a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">MENU</button>
+    <nav class="links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#what-we-do">What We Do</a>
+      <a href="#events">Events</a>
+      <a href="#projects">Projects</a>
+      <a href="#postings">Postings</a>
+      <a href="#join">Join</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">// PennWest University — Dept. of Engineering Technology</p>
+    <h1 class="hero-title">Engineering Technology Club</h1>
+    <p class="hero-sub">Mechatronics, controls, and hands-on builds. We tour facilities, bring in people doing the work, and put tools in members' hands — not just talk about it.</p>
+    <div class="hero-cta">
+      <a href="#join" class="btn btn-primary">Get Involved</a>
+      <a href="#events" class="btn btn-ghost">See Upcoming Events</a>
+    </div>
+    <div class="title-block">
+      <div class="tb-cell">
+        <p class="tb-label">Chapter</p>
+        <p class="tb-value">ET CLUB</p>
+      </div>
+      <div class="tb-cell">
+        <p class="tb-label">Dept.</p>
+        <p class="tb-value">Eng. Tech.</p>
+      </div>
+      <div class="tb-cell">
+        <p class="tb-label">Term</p>
+        <p class="tb-value">Fall 2026</p>
+      </div>
+      <div class="tb-cell">
+        <p class="tb-label">Status</p>
+        <p class="tb-value">Active</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="edit-note">EDIT ME — swap in your real mission statement, meeting time/room, and any club history you want up front.</div>
+    <div class="section-head">
+      <div>
+        <p class="section-num">01 — About</p>
+        <h2>Who we are</h2>
+      </div>
+      <p class="section-note">Add a line here about how long the club has existed or what makes it distinct.</p>
+    </div>
+    <p class="lede">We're a student-run club for anyone building toward a career in mechatronics, controls, or engineering technology.</p>
+    <p class="lede-sub">Some of us are headed into industrial controls, some into robotics, some still figuring it out — the club exists to give everyone real exposure: facility tours, people working in the field, and enough hands-on time to actually build something before graduation.</p>
+  </div>
+</section>
+
+<section id="what-we-do">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="section-num">02 — What We Do</p>
+        <h2>Four things, done well</h2>
+      </div>
+      <p class="section-note">Not a new event every week — a small set of things worth showing up for.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3><span class="mark">▸</span> Facility Tours</h3>
+        <p>Visits to manufacturers, plants, and shops so members see the equipment and processes their coursework describes, not just the theory.</p>
+      </div>
+      <div class="card">
+        <h3><span class="mark">▸</span> Build Nights</h3>
+        <p>Hands-on sessions — soldering, basic circuits, small embedded projects members can start and finish in one sitting.</p>
+      </div>
+      <div class="card">
+        <h3><span class="mark">▸</span> Study Groups</h3>
+        <p>Open sessions for the FE exam and tough coursework — bring a problem set, work through it with people in the same classes.</p>
+      </div>
+      <div class="card">
+        <h3><span class="mark">▸</span> Project Showcases</h3>
+        <p>Members present whatever they're building — capstones, personal projects, internship work — for practice and feedback.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="events">
+  <div class="wrap">
+    <div class="edit-note">EDIT ME — replace these with real dates once they're locked in. Delete the "TBD" rows or fill them in.</div>
+    <div class="section-head">
+      <div>
+        <p class="section-num">03 — Events</p>
+        <h2>This semester</h2>
+      </div>
+      <p class="section-note">Updated as things get scheduled.</p>
+    </div>
+    <div class="event-list">
+      <div class="event-row">
+        <span class="event-date">FALL · TBD</span>
+        <span class="event-name">Heartland Fabrication Facility Tour</span>
+        <span class="event-type">Tour</span>
+      </div>
+      <div class="event-row">
+        <span class="event-date">BIWEEKLY</span>
+        <span class="event-name">FE Exam &amp; Coursework Study Group</span>
+        <span class="event-type">Study Group</span>
+      </div>
+      <div class="event-row">
+        <span class="event-date">TBD</span>
+        <span class="event-name">Project Showcase Night</span>
+        <span class="event-type">Showcase</span>
+      </div>
+      <div class="event-row">
+        <span class="event-date">TBD</span>
+        <span class="event-name">Build Night — Intro to Soldering</span>
+        <span class="event-type">Workshop</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="section-num">04 — Projects</p>
+        <h2>What members are building</h2>
+      </div>
+      <p class="section-note">Pulled live from the club database. New submissions appear here once approved.</p>
+    </div>
+
+    <div id="projectsList" class="proj-grid">
+      <p class="state-msg">Loading projects…</p>
+    </div>
+
+    <div class="submit-toggle">
+      <button class="btn btn-ghost" style="color:var(--ink);border-color:var(--ink);" id="toggleProjectForm" type="button" aria-expanded="false" aria-controls="projectFormPanel">+ Submit a Project</button>
+    </div>
+
+    <div class="submit-panel" id="projectFormPanel">
+      <h4>Submit a project</h4>
+      <p class="form-note">Goes into a review queue — an officer approves it before it shows up publicly.</p>
+      <form id="projectForm">
+        <div class="form-grid">
+          <div class="field full">
+            <label for="pTitle">Project title</label>
+            <input type="text" id="pTitle" required maxlength="80">
+          </div>
+          <div class="field">
+            <label for="pLead">Your name</label>
+            <input type="text" id="pLead" required maxlength="60">
+          </div>
+          <div class="field">
+            <label for="pEmail">Email (not shown publicly)</label>
+            <input type="email" id="pEmail" required>
+          </div>
+          <div class="field">
+            <label for="pStatus">Status</label>
+            <select id="pStatus">
+              <option>In Progress</option>
+              <option>Ongoing</option>
+              <option>Complete</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="pType">Type</label>
+            <select id="pType">
+              <option>Personal</option>
+              <option>Capstone</option>
+              <option>Club</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="pDesc">Short description</label>
+            <textarea id="pDesc" required maxlength="280"></textarea>
+          </div>
+          <div class="field full">
+            <label for="pPaper">Paper / publication link (optional)</label>
+            <input type="url" id="pPaper" placeholder="https://…">
+          </div>
+          <input type="text" class="honey" id="pHoney" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-submit">Submit for Review</button>
+          <span class="form-status" id="projectFormStatus"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="postings">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="section-num">05 — Postings</p>
+        <h2>Jobs &amp; internships</h2>
+      </div>
+      <p class="section-note">Shared by members and alumni. Also pulled live from the database.</p>
+    </div>
+
+    <div id="postingsList" class="event-list">
+      <p class="state-msg">Loading postings…</p>
+    </div>
+
+    <div class="submit-toggle">
+      <button class="btn btn-ghost" style="color:var(--ink);border-color:var(--ink);" id="togglePostingForm" type="button" aria-expanded="false" aria-controls="postingFormPanel">+ Share a Posting</button>
+    </div>
+
+    <div class="submit-panel" id="postingFormPanel">
+      <h4>Share a job or internship</h4>
+      <p class="form-note">Goes into a review queue — an officer approves it before it shows up publicly.</p>
+      <form id="postingForm">
+        <div class="form-grid">
+          <div class="field full">
+            <label for="jTitle">Role title</label>
+            <input type="text" id="jTitle" required maxlength="80">
+          </div>
+          <div class="field">
+            <label for="jCompany">Company</label>
+            <input type="text" id="jCompany" required maxlength="60">
+          </div>
+          <div class="field">
+            <label for="jType">Type</label>
+            <select id="jType">
+              <option>Internship</option>
+              <option>Job</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="jLink">Link to posting</label>
+            <input type="url" id="jLink" required placeholder="https://…">
+          </div>
+          <div class="field full">
+            <label for="jNotes">Notes (optional)</label>
+            <textarea id="jNotes" maxlength="280"></textarea>
+          </div>
+          <div class="field full">
+            <label for="jEmail">Your email (not shown publicly)</label>
+            <input type="email" id="jEmail" required>
+          </div>
+          <input type="text" class="honey" id="jHoney" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-submit">Submit for Review</button>
+          <span class="form-status" id="postingFormStatus"></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="join" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="edit-note">EDIT ME — swap in your real meeting time/room and contact email.</div>
+    <div class="join-inner">
+      <div>
+        <p class="section-num">06 — Join</p>
+        <h2 style="margin-bottom:14px;">Come to a meeting</h2>
+        <p class="lede">No application, no prerequisites — just show up.</p>
+        <p class="lede-sub">Meetings: [Day, Time, Room] · Contact: [club email]</p>
+      </div>
+      <a href="mailto:etclub@example.edu" class="btn btn-primary">Email the Club</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;width:100%;">
+    <span>Engineering Technology Club · PennWest University</span>
+    <span>Site maintained by club officers</span>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+  }));
+
+  // toggle submit panels
+  function wireToggle(btnId, panelId){
+    const btn = document.getElementById(btnId);
+    const panel = document.getElementById(panelId);
+    btn.addEventListener('click', () => {
+      const open = panel.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.textContent = open ? '– Close' : btn.dataset.label;
+    });
+    btn.dataset.label = btn.textContent;
+  }
+  wireToggle('toggleProjectForm', 'projectFormPanel');
+  wireToggle('togglePostingForm', 'postingFormPanel');
+</script>
+
+<!-- ============================================================
+     SUPABASE CONFIG — fill these in with your own project's values
+     (Supabase dashboard → Project Settings → API)
+     ============================================================ -->
+<script>
+  const SUPABASE_URL = 'https://uoeeltrfltuvqobjyrpl.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvZWVsdHJmbHR1dnFvYmp5cnBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNDA0NzksImV4cCI6MjA5OTgxNjQ3OX0.IAmHpCfxJa_mxdNOHY9j-nQQ-50UExzyIg4X3jcc4h8';
+</script>
+
+<script type="module">
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+  const configured = SUPABASE_URL.startsWith('http') && SUPABASE_ANON_KEY.length > 20;
+  const projectsList = document.getElementById('projectsList');
+  const postingsList = document.getElementById('postingsList');
+
+  if (!configured) {
+    projectsList.innerHTML = '<p class="state-msg error">Site isn\'t connected to a database yet — add your Supabase URL and anon key near the bottom of index.html. See README.md.</p>';
+    postingsList.innerHTML = '<p class="state-msg error">Site isn\'t connected to a database yet — add your Supabase URL and anon key near the bottom of index.html. See README.md.</p>';
+  } else {
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ---------- render helpers ----------
+    function escapeHtml(str){
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function renderProjects(rows){
+      if (!rows.length){
+        projectsList.innerHTML = '<p class="state-msg">No projects posted yet — be the first to submit one.</p>';
+        return;
+      }
+      projectsList.innerHTML = rows.map(p => `
+        <div class="proj-card">
+          <div class="proj-head">
+            <h3>${escapeHtml(p.title)}</h3>
+            <p>${escapeHtml(p.description)}</p>
+          </div>
+          <div class="proj-meta">
+            <div><p class="tb-label">Status</p><p class="tb-value">${escapeHtml(p.status)}</p></div>
+            <div><p class="tb-label">Type</p><p class="tb-value">${escapeHtml(p.project_type)}</p></div>
+            <div><p class="tb-label">Lead</p><p class="tb-value">${escapeHtml(p.lead)}</p></div>
+          </div>
+          ${p.paper_url ? `<div class="proj-paper"><a href="${escapeHtml(p.paper_url)}" target="_blank" rel="noopener noreferrer">Read the paper →</a></div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function renderPostings(rows){
+      if (!rows.length){
+        postingsList.innerHTML = '<p class="state-msg">No postings yet — share one if you\'ve got it.</p>';
+        return;
+      }
+      postingsList.innerHTML = rows.map(j => `
+        <div class="posting-row">
+          <span class="posting-type">${escapeHtml(j.posting_type)}</span>
+          <span class="posting-main">
+            <span class="event-name">${escapeHtml(j.title)}</span>
+            <div class="company">${escapeHtml(j.company)}${j.notes ? ' · ' + escapeHtml(j.notes) : ''}</div>
+          </span>
+          <a class="posting-link" href="${escapeHtml(j.link)}" target="_blank" rel="noopener noreferrer">View</a>
+        </div>
+      `).join('');
+    }
+
+    // ---------- load data ----------
+    async function loadProjects(){
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('approved', true)
+        .order('created_at', { ascending: false });
+      if (error){
+        projectsList.innerHTML = '<p class="state-msg error">Couldn\'t load projects right now.</p>';
+        return;
+      }
+      renderProjects(data);
+    }
+
+    async function loadPostings(){
+      const { data, error } = await supabase
+        .from('postings')
+        .select('*')
+        .eq('approved', true)
+        .order('created_at', { ascending: false });
+      if (error){
+        postingsList.innerHTML = '<p class="state-msg error">Couldn\'t load postings right now.</p>';
+        return;
+      }
+      renderPostings(data);
+    }
+
+    loadProjects();
+    loadPostings();
+
+    // ---------- form submissions ----------
+    document.getElementById('projectForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const statusEl = document.getElementById('projectFormStatus');
+      if (document.getElementById('pHoney').value) return; // honeypot tripped
+
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      statusEl.textContent = 'Submitting…';
+      statusEl.className = 'form-status';
+
+      const { error } = await supabase.from('projects').insert({
+        title: document.getElementById('pTitle').value.trim(),
+        lead: document.getElementById('pLead').value.trim(),
+        description: document.getElementById('pDesc').value.trim(),
+        status: document.getElementById('pStatus').value,
+        project_type: document.getElementById('pType').value,
+        paper_url: document.getElementById('pPaper').value.trim() || null,
+        submitted_by_email: document.getElementById('pEmail').value.trim(),
+        approved: false
+      });
+
+      btn.disabled = false;
+      if (error){
+        statusEl.textContent = 'Something went wrong — try again.';
+        statusEl.className = 'form-status error';
+      } else {
+        statusEl.textContent = 'Submitted — an officer will review it soon.';
+        statusEl.className = 'form-status ok';
+        e.target.reset();
+      }
+    });
+
+    document.getElementById('postingForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const statusEl = document.getElementById('postingFormStatus');
+      if (document.getElementById('jHoney').value) return; // honeypot tripped
+
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      statusEl.textContent = 'Submitting…';
+      statusEl.className = 'form-status';
+
+      const { error } = await supabase.from('postings').insert({
+        title: document.getElementById('jTitle').value.trim(),
+        company: document.getElementById('jCompany').value.trim(),
+        posting_type: document.getElementById('jType').value,
+        link: document.getElementById('jLink').value.trim(),
+        notes: document.getElementById('jNotes').value.trim(),
+        submitted_by_email: document.getElementById('jEmail').value.trim(),
+        approved: false
+      });
+
+      btn.disabled = false;
+      if (error){
+        statusEl.textContent = 'Something went wrong — try again.';
+        statusEl.className = 'form-status error';
+      } else {
+        statusEl.textContent = 'Submitted — an officer will review it soon.';
+        statusEl.className = 'form-status ok';
+        e.target.reset();
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
