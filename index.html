@@ -378,6 +378,19 @@
   .proj-meta div:last-child{border-right:none;}
   .proj-meta .tb-label{color:var(--ink-soft);}
   .proj-meta .tb-value{color:var(--ink);font-family:var(--mono);font-size:12.5px;}
+  .proj-paper{
+    border-top:1px solid var(--paper-line);
+    padding:12px 24px;
+  }
+  .proj-paper a{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--amber-dim);
+    text-decoration:none;
+  }
+  .proj-paper a:hover{color:var(--ink);}
 
   /* join */
   .join-inner{
@@ -730,6 +743,10 @@
             <label for="pDesc">Short description</label>
             <textarea id="pDesc" required maxlength="280"></textarea>
           </div>
+          <div class="field full">
+            <label for="pPaper">Paper / publication link (optional)</label>
+            <input type="url" id="pPaper" placeholder="https://…">
+          </div>
           <input type="text" class="honey" id="pHoney" tabindex="-1" autocomplete="off">
         </div>
         <div class="form-actions">
@@ -856,8 +873,8 @@
      (Supabase dashboard → Project Settings → API)
      ============================================================ -->
 <script>
-  const SUPABASE_URL = 'https://uoeeltrfltuvqobjyrpl.supabase.co';   // e.g. https://xxxxx.supabase.co
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvZWVsdHJmbHR1dnFvYmp5cnBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNDA0NzksImV4cCI6MjA5OTgxNjQ3OX0.IAmHpCfxJa_mxdNOHY9j-nQQ-50UExzyIg4X3jcc4h8'; // the public "anon" key, not the service key
+  const SUPABASE_URL = 'https://uoeeltrfltuvqobjyrpl.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvZWVsdHJmbHR1dnFvYmp5cnBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNDA0NzksImV4cCI6MjA5OTgxNjQ3OX0.IAmHpCfxJa_mxdNOHY9j-nQQ-50UExzyIg4X3jcc4h8';
 </script>
 
 <script type="module">
@@ -896,6 +913,7 @@
             <div><p class="tb-label">Type</p><p class="tb-value">${escapeHtml(p.project_type)}</p></div>
             <div><p class="tb-label">Lead</p><p class="tb-value">${escapeHtml(p.lead)}</p></div>
           </div>
+          ${p.paper_url ? `<div class="proj-paper"><a href="${escapeHtml(p.paper_url)}" target="_blank" rel="noopener noreferrer">Read the paper →</a></div>` : ''}
         </div>
       `).join('');
     }
@@ -964,6 +982,7 @@
         description: document.getElementById('pDesc').value.trim(),
         status: document.getElementById('pStatus').value,
         project_type: document.getElementById('pType').value,
+        paper_url: document.getElementById('pPaper').value.trim() || null,
         submitted_by_email: document.getElementById('pEmail').value.trim(),
         approved: false
       });
