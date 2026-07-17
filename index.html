@@ -172,6 +172,20 @@
     max-width:52ch;
     margin:0 0 40px;
   }
+  .motto{
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:19px;
+    color:var(--amber);
+    margin:0 0 6px;
+  }
+  .motto-sub{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--white-soft);
+    letter-spacing:0.02em;
+    margin:0 0 28px;
+  }
   .hero-cta{
     display:flex;
     gap:14px;
@@ -632,6 +646,8 @@
     </svg>
     <p class="eyebrow">// PennWest University — Dept. of Engineering Technology</p>
     <h1 class="hero-title">Engineering Technology Club</h1>
+    <p class="motto">Learn by building.</p>
+    <p class="motto-sub">Kaizen — a little better with every build.</p>
     <p class="hero-sub">Mechatronics, controls, and hands-on builds. We tour facilities, bring in people doing the work, and put tools in members' hands — not just talk about it.</p>
     <div class="hero-cta">
       <a href="#join" class="btn btn-primary">Get Involved</a>
@@ -785,6 +801,7 @@
             <label for="pType">Type</label>
             <select id="pType">
               <option>Personal</option>
+              <option>Class Project</option>
               <option>Capstone</option>
               <option>Club</option>
             </select>
