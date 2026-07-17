@@ -387,6 +387,73 @@
     font-size:14.5px;
     margin:0;
   }
+  .proj-collab{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    margin:10px 0 0 !important;
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- team / people cards ---------- */
+  .person-card{
+    border:1px solid var(--ink);
+    background:var(--white);
+    padding:24px;
+  }
+  .person-top{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:14px;
+  }
+  .person-avatar{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    object-fit:cover;
+    background:var(--paper-line);
+    flex:none;
+  }
+  .person-avatar-fallback{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--white);
+    font-family:var(--mono);
+    font-size:16px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:none;
+  }
+  .person-name{
+    font-family:var(--mono);
+    font-size:15px;
+    margin:0 0 2px;
+  }
+  .person-role{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--amber-dim);
+    margin:0;
+  }
+  .person-bio{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    margin:0 0 10px;
+  }
+  .person-email{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    text-decoration:none;
+  }
+  .person-email:hover{color:var(--amber-dim);}
   .proj-meta{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -603,6 +670,7 @@
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">MENU</button>
     <nav class="links" id="navLinks">
       <a href="#about">About</a>
+      <a href="#team">Team</a>
       <a href="#what-we-do">What We Do</a>
       <a href="#events">Events</a>
       <a href="#projects">Projects</a>
@@ -689,11 +757,26 @@
   </div>
 </section>
 
+<section id="team">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="section-num">02 — Team</p>
+        <h2>Officers &amp; faculty advisor</h2>
+      </div>
+      <p class="section-note">Pulled live from the club database.</p>
+    </div>
+    <div id="teamList" class="proj-grid">
+      <p class="state-msg">Loading team…</p>
+    </div>
+  </div>
+</section>
+
 <section id="what-we-do">
   <div class="wrap">
     <div class="section-head">
       <div>
-        <p class="section-num">02 — What We Do</p>
+        <p class="section-num">03 — What We Do</p>
         <h2>Four things, done well</h2>
       </div>
       <p class="section-note">Not a new event every week — a small set of things worth showing up for.</p>
@@ -724,7 +807,7 @@
     <div class="edit-note">EDIT ME — replace these with real dates once they're locked in. Delete the "TBD" rows or fill them in.</div>
     <div class="section-head">
       <div>
-        <p class="section-num">03 — Events</p>
+        <p class="section-num">04 — Events</p>
         <h2>This semester</h2>
       </div>
       <p class="section-note">Updated as things get scheduled.</p>
@@ -758,7 +841,7 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <p class="section-num">04 — Projects</p>
+        <p class="section-num">05 — Projects</p>
         <h2>What members are building</h2>
       </div>
       <p class="section-note">Pulled live from the club database. New submissions appear here once approved.</p>
@@ -788,6 +871,10 @@
           <div class="field">
             <label for="pEmail">Email (not shown publicly)</label>
             <input type="email" id="pEmail" required>
+          </div>
+          <div class="field full">
+            <label for="pCollab">Worked on this with (optional)</label>
+            <input type="text" id="pCollab" maxlength="150" placeholder="e.g. Jane Smith, Alex Lee">
           </div>
           <div class="field">
             <label for="pStatus">Status</label>
@@ -837,7 +924,7 @@
   <div class="wrap">
     <div class="section-head">
       <div>
-        <p class="section-num">05 — Postings</p>
+        <p class="section-num">06 — Postings</p>
         <h2>Jobs &amp; internships</h2>
       </div>
       <p class="section-note">Shared by members and alumni. Also pulled live from the database.</p>
@@ -899,7 +986,7 @@
     <div class="edit-note">EDIT ME — swap in your real meeting time/room and contact email.</div>
     <div class="join-inner">
       <div>
-        <p class="section-num">06 — Join</p>
+        <p class="section-num">07 — Join</p>
         <h2 style="margin-bottom:14px;">Come to a meeting</h2>
         <p class="lede">No application, no prerequisites — just show up.</p>
         <p class="lede-sub">Meetings: [Day, Time, Room] · Contact: [club email]</p>
@@ -961,10 +1048,12 @@
   const configured = SUPABASE_URL.startsWith('http') && SUPABASE_ANON_KEY.length > 20;
   const projectsList = document.getElementById('projectsList');
   const postingsList = document.getElementById('postingsList');
+  const teamList = document.getElementById('teamList');
 
   if (!configured) {
     projectsList.innerHTML = '<p class="state-msg error">Site isn\'t connected to a database yet — add your Supabase URL and anon key near the bottom of index.html. See README.md.</p>';
     postingsList.innerHTML = '<p class="state-msg error">Site isn\'t connected to a database yet — add your Supabase URL and anon key near the bottom of index.html. See README.md.</p>';
+    teamList.innerHTML = '<p class="state-msg error">Site isn\'t connected to a database yet — add your Supabase URL and anon key near the bottom of index.html. See README.md.</p>';
   } else {
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -986,6 +1075,7 @@
           <div class="proj-head">
             <h3>${escapeHtml(p.title)}</h3>
             <p>${escapeHtml(p.description)}</p>
+            ${p.collaborators ? `<p class="proj-collab">With: ${escapeHtml(p.collaborators)}</p>` : ''}
           </div>
           <div class="proj-meta">
             <div><p class="tb-label">Status</p><p class="tb-value">${escapeHtml(p.status)}</p></div>
@@ -1011,6 +1101,32 @@
             <div class="company">${escapeHtml(j.company)}${j.notes ? ' · ' + escapeHtml(j.notes) : ''}</div>
           </span>
           <a class="posting-link" href="${escapeHtml(j.link)}" target="_blank" rel="noopener noreferrer">View</a>
+        </div>
+      `).join('');
+    }
+
+    function initials(name){
+      return name.trim().split(/\s+/).map(p => p[0]).slice(0,2).join('').toUpperCase();
+    }
+
+    function renderPeople(rows){
+      if (!rows.length){
+        teamList.innerHTML = '<p class="state-msg">Team info coming soon.</p>';
+        return;
+      }
+      teamList.innerHTML = rows.map(p => `
+        <div class="person-card">
+          <div class="person-top">
+            ${p.photo_url
+              ? `<img class="person-avatar" src="${escapeHtml(p.photo_url)}" alt="${escapeHtml(p.name)}">`
+              : `<div class="person-avatar-fallback">${escapeHtml(initials(p.name))}</div>`}
+            <div>
+              <p class="person-name">${escapeHtml(p.name)}</p>
+              <p class="person-role">${escapeHtml(p.role)}</p>
+            </div>
+          </div>
+          <p class="person-bio">${escapeHtml(p.bio)}</p>
+          ${p.email ? `<a class="person-email" href="mailto:${escapeHtml(p.email)}">${escapeHtml(p.email)}</a>` : ''}
         </div>
       `).join('');
     }
@@ -1042,8 +1158,21 @@
       renderPostings(data);
     }
 
+    async function loadPeople(){
+      const { data, error } = await supabase
+        .from('people')
+        .select('*')
+        .order('display_order', { ascending: true });
+      if (error){
+        teamList.innerHTML = '<p class="state-msg error">Couldn\'t load team info right now.</p>';
+        return;
+      }
+      renderPeople(data);
+    }
+
     loadProjects();
     loadPostings();
+    loadPeople();
 
     // ---------- form submissions ----------
     document.getElementById('projectForm').addEventListener('submit', async (e) => {
@@ -1088,6 +1217,7 @@
       const { error } = await supabase.from('projects').insert({
         title: document.getElementById('pTitle').value.trim(),
         lead: document.getElementById('pLead').value.trim(),
+        collaborators: document.getElementById('pCollab').value.trim() || null,
         description: document.getElementById('pDesc').value.trim(),
         status: document.getElementById('pStatus').value,
         project_type: document.getElementById('pType').value,
