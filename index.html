@@ -5,22 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Engineering Technology Club · PennWest University</title>
 <meta name="description" content="Engineering Technology Club at PennWest University — mechatronics, controls, build nights, and industry connections.">
+<link rel="icon" type="image/svg+xml" href="assets/pennwest-etc-circuit-icon.svg">
+<meta name="theme-color" content="#141414">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --blueprint:#0E1C2E;
-    --blueprint-line:#2A5080;
-    --blueprint-line-soft:#1B3A5C;
-    --amber:#F0A83A;
-    --amber-dim:#B87F26;
-    --paper:#F1ECE0;
-    --paper-line:#D8D0BC;
-    --ink:#16202B;
-    --ink-soft:#4B5A68;
-    --white:#F4F7FA;
-    --white-soft:#B9C6D4;
+    --blueprint:#141414;
+    --blueprint-line:#3A1E22;
+    --blueprint-line-soft:#241315;
+    --amber:#D33245;
+    --amber-dim:#8E1620;
+    --paper:#F5F4F1;
+    --paper-line:#DEDAD2;
+    --ink:#141414;
+    --ink-soft:#5A5650;
+    --white:#FBFAF8;
+    --white-soft:#C9C4BC;
     --mono:'IBM Plex Mono', ui-monospace, monospace;
     --sans:'IBM Plex Sans', system-ui, sans-serif;
     --maxw:1120px;
@@ -56,32 +58,27 @@
     position:sticky;
     top:0;
     z-index:50;
-    background:rgba(14,28,46,0.94);
+    background:rgba(251,250,248,0.96);
     backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--blueprint-line);
+    border-bottom:1px solid var(--paper-line);
   }
   .nav-inner{
     max-width:var(--maxw);
     margin:0 auto;
-    padding:16px 28px;
+    padding:12px 28px;
     display:flex;
     align-items:center;
     justify-content:space-between;
   }
   .nav-mark{
-    font-family:var(--mono);
-    font-size:13px;
-    letter-spacing:0.08em;
-    color:var(--white);
-    text-decoration:none;
     display:flex;
     align-items:center;
-    gap:10px;
+    text-decoration:none;
   }
-  .nav-mark .dot{
-    width:8px;height:8px;background:var(--amber);
-    display:inline-block;
-    flex:none;
+  .nav-mark img{
+    height:36px;
+    width:auto;
+    display:block;
   }
   nav.links{
     display:flex;
@@ -92,21 +89,21 @@
     font-size:12.5px;
     letter-spacing:0.06em;
     text-transform:uppercase;
-    color:var(--white-soft);
+    color:var(--ink-soft);
     text-decoration:none;
     transition:color 0.15s ease;
   }
-  nav.links a:hover{color:var(--amber);}
+  nav.links a:hover{color:var(--amber-dim);}
   .nav-toggle{display:none;}
 
   @media (max-width:720px){
     nav.links{
       position:fixed;
-      top:57px;left:0;right:0;
-      background:var(--blueprint);
+      top:61px;left:0;right:0;
+      background:var(--paper);
       flex-direction:column;
       gap:0;
-      border-bottom:1px solid var(--blueprint-line);
+      border-bottom:1px solid var(--paper-line);
       max-height:0;
       overflow:hidden;
       transition:max-height 0.25s ease;
@@ -114,13 +111,13 @@
     nav.links.open{max-height:280px;}
     nav.links a{
       padding:16px 28px;
-      border-top:1px solid var(--blueprint-line-soft);
+      border-top:1px solid var(--paper-line);
     }
     .nav-toggle{
       display:block;
       background:none;
-      border:1px solid var(--blueprint-line);
-      color:var(--white);
+      border:1px solid var(--ink);
+      color:var(--ink);
       font-family:var(--mono);
       font-size:12px;
       padding:6px 10px;
@@ -143,7 +140,7 @@
     content:"";
     position:absolute;
     inset:0;
-    background:radial-gradient(ellipse at 20% 20%, rgba(240,168,58,0.10), transparent 55%);
+    background:radial-gradient(ellipse at 20% 20%, rgba(211,50,69,0.14), transparent 55%);
     pointer-events:none;
   }
   .hero-inner{
@@ -226,6 +223,16 @@
     color:var(--white);
     margin:0;
   }
+  .hero-mark{
+    position:absolute;
+    top:-40px;
+    right:-40px;
+    width:340px;
+    height:340px;
+    opacity:0.14;
+    pointer-events:none;
+  }
+  @media (max-width:720px){.hero-mark{display:none;}}
   @media (max-width:600px){
     .title-block{grid-template-columns:repeat(2,1fr);}
     .tb-cell:nth-child(4n){border-right:1px solid var(--blueprint-line);}
@@ -427,7 +434,7 @@
   }
 
   .edit-note{
-    background:#FCEFD9;
+    background:#F7E5E1;
     border:1px dashed var(--amber-dim);
     color:var(--ink);
     font-family:var(--mono);
@@ -578,7 +585,7 @@
 
 <header class="site-nav">
   <div class="nav-inner">
-    <a href="#" class="nav-mark"><span class="dot"></span>ET CLUB · PENNWEST</a>
+    <a href="#" class="nav-mark"><img src="assets/pennwest-etc-circuit-lockup.svg" alt="PennWest Engineering Technology Club"></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">MENU</button>
     <nav class="links" id="navLinks">
       <a href="#about">About</a>
@@ -593,6 +600,36 @@
 
 <section class="hero">
   <div class="hero-inner">
+    <svg class="hero-mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <polyline points="30,30 30,65 65,65" fill="none" stroke="#FBFAF8" stroke-width="4"></polyline>
+      <polyline points="170,30 170,65 135,65" fill="none" stroke="#FBFAF8" stroke-width="4"></polyline>
+      <polyline points="30,170 30,135 65,135" fill="none" stroke="#FBFAF8" stroke-width="4"></polyline>
+      <polyline points="170,170 170,135 135,135" fill="none" stroke="#FBFAF8" stroke-width="4"></polyline>
+      <rect x="26" y="26" width="8" height="8" fill="#FBFAF8"></rect>
+      <rect x="166" y="26" width="8" height="8" fill="#FBFAF8"></rect>
+      <rect x="26" y="166" width="8" height="8" fill="#FBFAF8"></rect>
+      <rect x="166" y="166" width="8" height="8" fill="#FBFAF8"></rect>
+      <rect x="78" y="49" width="6" height="16" fill="#FBFAF8"></rect>
+      <rect x="97" y="49" width="6" height="16" fill="#FBFAF8"></rect>
+      <rect x="116" y="49" width="6" height="16" fill="#FBFAF8"></rect>
+      <rect x="78" y="135" width="6" height="16" fill="#FBFAF8"></rect>
+      <rect x="97" y="135" width="6" height="16" fill="#FBFAF8"></rect>
+      <rect x="116" y="135" width="6" height="16" fill="#FBFAF8"></rect>
+      <rect x="49" y="78" width="16" height="6" fill="#FBFAF8"></rect>
+      <rect x="49" y="97" width="16" height="6" fill="#FBFAF8"></rect>
+      <rect x="49" y="116" width="16" height="6" fill="#FBFAF8"></rect>
+      <rect x="135" y="78" width="16" height="6" fill="#FBFAF8"></rect>
+      <rect x="135" y="97" width="16" height="6" fill="#FBFAF8"></rect>
+      <rect x="135" y="116" width="16" height="6" fill="#FBFAF8"></rect>
+      <rect x="65" y="65" width="70" height="70" rx="8" fill="none" stroke="#FBFAF8" stroke-width="5"></rect>
+      <line x1="82" y1="82" x2="118" y2="82" stroke="#FBFAF8" stroke-width="4"></line>
+      <line x1="118" y1="82" x2="118" y2="100" stroke="#FBFAF8" stroke-width="4"></line>
+      <line x1="82" y1="118" x2="82" y2="100" stroke="#FBFAF8" stroke-width="4"></line>
+      <line x1="82" y1="100" x2="118" y2="100" stroke="#FBFAF8" stroke-width="4" opacity="0.5"></line>
+      <circle cx="82" cy="82" r="5" fill="#D33245"></circle>
+      <circle cx="118" cy="118" r="5" fill="#D33245"></circle>
+      <circle cx="100" cy="100" r="8" fill="#D33245"></circle>
+    </svg>
     <p class="eyebrow">// PennWest University — Dept. of Engineering Technology</p>
     <h1 class="hero-title">Engineering Technology Club</h1>
     <p class="hero-sub">Mechatronics, controls, and hands-on builds. We tour facilities, bring in people doing the work, and put tools in members' hands — not just talk about it.</p>
@@ -856,8 +893,11 @@
 </section>
 
 <footer>
-  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;width:100%;">
-    <span>Engineering Technology Club · PennWest University</span>
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;width:100%;">
+    <span style="display:flex;align-items:center;gap:10px;">
+      <img src="assets/pennwest-etc-robot-icon.svg" alt="" style="height:22px;width:auto;">
+      Engineering Technology Club · PennWest University
+    </span>
     <span>Site maintained by club officers</span>
   </div>
 </footer>

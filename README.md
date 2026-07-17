@@ -7,7 +7,7 @@ No server to run — GitHub Pages hosts the static file, Supabase's free tier ho
 ## Part 1 — Get the site live on GitHub Pages
 
 1. Create a new GitHub repo (e.g. `et-club-site`).
-2. Upload `index.html` to the repo.
+2. Upload `index.html`, `README.md`, `supabase-setup.sql`, and the `assets/` folder (with the four logo SVGs) to it — keep the folder structure intact, since `index.html` references them at `assets/...`.
 3. Go to **Settings → Pages**.
 4. Under **Build and deployment → Source**, choose **Deploy from a branch** → `main` → `/ (root)` → **Save**.
 5. Your site goes live at `https://yourusername.github.io/repo-name/` within a minute or two.
